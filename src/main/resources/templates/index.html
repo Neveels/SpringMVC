@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список депозитов</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<h1>Список депозитов</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Процентная ставка</th>
+        <th>Минимальная сумма</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="deposit : ${deposits}">
+        <td th:text="${deposit.id}"></td>
+        <td th:text="${deposit.name}"></td>
+        <td th:text="${deposit.interestRate}">%</td>
+        <td th:text="${deposit.minimalSumOfDeposit}">р.</td>
+    </tr>
+    </tbody>
+</table>
+<h2>Оформление депозита</h2>
+<form action="client/submit-deposit" method="post" class="deposit-form">
+    <div class="form-group">
+        <label for="depositType">Выберите депозит:</label>
+        <select id="depositType" name="depositType" class="form-control" required>
+            <option th:each="deposit : ${deposits}" th:value="${deposit.id}" th:text="${deposit.name}"></option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="depositAmount">Сумма депозита:</label>
+        <input type="number" id="depositAmount" name="depositAmount" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Оформить депозит</button>
+    </div>
+</form>
+<h2>Расчет процентных начислений</h2>
+<form action="client/amount" method="get">
+    <div class="form-group">
+        <label for="from">Начало периода:</label>
+        <input type="date" id="from" name="from" required>
+    </div>
+    <div class="form-group">
+        <label for="to">Конец периода:</label>
+        <input type="date" id="to" name="to" required>
+    </div>
+    <div class="form-group">
+        <button type="submit">Рассчитать</button>
+    </div>
+</form>
+
+<a href="/client/balance">Просмотр баланса</a>
+</body>
+</html>

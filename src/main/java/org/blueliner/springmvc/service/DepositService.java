@@ -19,7 +19,7 @@ import java.util.List;
 public class DepositService {
     private final DepositRepository depositRepository;
 
-    @PostConstruct
+//    @PostConstruct
     public void createSomeDeposits() {
         depositRepository.saveAll(List.of(
                 Deposit.builder()

@@ -1,17 +1,15 @@
 package org.blueliner.springmvc.dto;
 
-import lombok.Builder;
+import lombok.*;
 
-/**
- * @author Neevels
- * @version 1.0
- * @date 13.09.2023 10:59
- */
 @Builder
-public record DepositResponse(
-        Long id,
-        String name,
-        Integer interestRate,
-        Long minimalSumOfDeposit
-) {
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@ToString
+public class DepositResponse {
+    Long id;
+    String name;
+    Integer interestRate;
+    Long minimalSumOfDeposit;
 }

@@ -15,6 +15,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @ToString
 public class Operation {
     @Id
@@ -29,7 +30,23 @@ public class Operation {
     @JoinColumn(name = "deposit_id")
     private Deposit deposit;
 
+    public static enum OperationType {
+        ADD("Пополнение"),
+        WITHDRAWAL("Снятие");
 
+        public String url;
+
+        OperationType(String url) {
+            this.url = url;
+        }
+
+        @Override
+        public String toString() {
+            return "OperationType{" +
+                "url='" + url + '\'' +
+                '}';
+        }
+    }
     @PrePersist
     private void init() {
         dateOfCreation = LocalDate.now();

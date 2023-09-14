@@ -17,6 +17,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @ToString
 public class Client {
     @Id
